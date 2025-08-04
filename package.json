@@ -1,0 +1,31 @@
+{
+  "name": "@akub/payments-fns",
+  "version": "1.0.0",
+  "description": "Shared TypeScript types and classes for payments collection",
+  "main": "build/index.js",
+  "files": [
+    "/build"
+  ],
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean"
+  },
+  "keywords": [
+    "typescript",
+    "types",
+    "classes",
+    "shared"
+  ],
+  "author": "Jackmay Confidence",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.11.0"
+  }
+}
