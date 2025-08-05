@@ -300,8 +300,9 @@ export class PaystackService {
   // Virtual Accounts
   public async createDedicatedVirtualAccount(params: {
     customer: string,
-    subaccount: string,
+    subaccount?: string,
     split_code?: string
+    bank?: string
   }): Promise<Paystack.IVirtualAccount> {
     return await this.makeRequest(
       'POST',
@@ -309,7 +310,9 @@ export class PaystackService {
       {
         body: {
           ...params,
-          preferred_bank: "wema-bank"
+          subaccount: params.split_code ? null: params.subaccount,
+          split_code: params.subaccount ? null : params.split_code,
+          preferred_bank: params.bank ?? "wema-bank"
         },
       }
     );
@@ -324,7 +327,6 @@ export class PaystackService {
       {
         body: {
           ...params,
-          preferred_bank: "wema-bank"
         },
       }
     );
@@ -334,6 +336,13 @@ export class PaystackService {
     return await this.makeRequest(
       'DELETE',
       `/dedicated_account/${reference}`,
+    );
+  }
+
+  public async fetchDedicatedAccountProviders(): Promise<Paystack.IVirtualAccountProviders> {
+    return await this.makeRequest(
+      'GET',
+      `/dedicated_account/available_providers`,
     );
   }
 

@@ -89,13 +89,15 @@ export declare class PaystackService {
     }): Promise<Paystack.ITransfer>;
     createDedicatedVirtualAccount(params: {
         customer: string;
-        subaccount: string;
+        subaccount?: string;
         split_code?: string;
+        bank?: string;
     }): Promise<Paystack.IVirtualAccount>;
     splitDedicatedVirtualAccount(params: {
         split_code: string;
     }): Promise<Paystack.IVirtualAccount>;
     deactivateDedicatedVirtualAccount(reference: string): Promise<Paystack.IVirtualAccount>;
+    fetchDedicatedAccountProviders(): Promise<Paystack.IVirtualAccountProviders>;
     removeSplitOnDedicatedVirtualAccount(account_number: string): Promise<Paystack.IVirtualAccount>;
     fetchVirtualAccount(reference: string): Promise<Paystack.IVirtualAccountFetch>;
     connectDirectDebit(params: {

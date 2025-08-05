@@ -670,6 +670,16 @@ export declare namespace Paystack {
             customer: Customer;
         };
     }
+    export interface IVirtualAccountProviders {
+        status: boolean;
+        message: string;
+        data: {
+            provider_slug: string;
+            bank_id: number;
+            bank_name: string;
+            id: number;
+        }[];
+    }
     export interface IVirtualAccountFetch {
         status: boolean;
         message: string;

@@ -182,21 +182,27 @@ class PaystackService {
     // Virtual Accounts
     createDedicatedVirtualAccount(params) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             return yield this.makeRequest('POST', '/dedicated_account', {
-                body: Object.assign(Object.assign({}, params), { preferred_bank: "wema-bank" }),
+                body: Object.assign(Object.assign({}, params), { subaccount: params.split_code ? null : params.subaccount, split_code: params.subaccount ? null : params.split_code, preferred_bank: (_a = params.bank) !== null && _a !== void 0 ? _a : "wema-bank" }),
             });
         });
     }
     splitDedicatedVirtualAccount(params) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.makeRequest('POST', '/dedicated_account', {
-                body: Object.assign(Object.assign({}, params), { preferred_bank: "wema-bank" }),
+                body: Object.assign({}, params),
             });
         });
     }
     deactivateDedicatedVirtualAccount(reference) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.makeRequest('DELETE', `/dedicated_account/${reference}`);
+        });
+    }
+    fetchDedicatedAccountProviders() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.makeRequest('GET', `/dedicated_account/available_providers`);
         });
     }
     removeSplitOnDedicatedVirtualAccount(account_number) {

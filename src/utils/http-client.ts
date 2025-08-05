@@ -178,16 +178,53 @@ export class HttpClient {
     };
   }
 
-  private async handleError<T>(_error: unknown): Promise<StandardResponse<T>> {
-    const errorResponse: StandardResponse<T> = {
+  private async handleError<T>(error: unknown): Promise<StandardResponse<T>> {
+    let errorResponse: StandardResponse<T> = {
       success: false,
       error: {
         message: 'An unexpected error occurred',
       },
-      data: undefined, // Explicitly set data as undefined for error cases
+      data: undefined,
     };
 
-    // ... rest of the error handling logic remains the same
+    // Check if error is an AxiosError
+    if (axios.isAxiosError(error)) {
+      const axiosError = error;
+      const response = axiosError.response;
+
+      errorResponse = {
+        success: false,
+        error: {
+          message:
+            response?.data?.message ||
+            response?.data?.error ||
+            axiosError.message ||
+            'An unexpected error occurred',
+          code: response?.status,
+          details: response?.data,
+        },
+        metadata: {
+          statusCode: response?.status ?? 0,
+          headers: response?.headers as Record<string, string>,
+        },
+        data: undefined,
+      };
+    } else if (error instanceof Error) {
+      // Non-Axios error
+      errorResponse.error = {
+        message: error.message,
+      };
+    }
+
+    // Call custom error handler if provided
+    if (this.errorHandler) {
+      await this.errorHandler({
+        message: errorResponse.error?.message || 'Unknown error',
+        statusCode: errorResponse.metadata?.statusCode,
+        details: errorResponse.error?.details,
+        isAxiosError: axios.isAxiosError(error),
+      });
+    }
 
     return errorResponse;
   }

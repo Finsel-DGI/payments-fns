@@ -100,16 +100,52 @@ class HttpClient {
             },
         };
     }
-    handleError(_error) {
+    handleError(error) {
         return __awaiter(this, void 0, void 0, function* () {
-            const errorResponse = {
+            var _a, _b, _c, _d, _e, _f;
+            let errorResponse = {
                 success: false,
                 error: {
                     message: 'An unexpected error occurred',
                 },
-                data: undefined, // Explicitly set data as undefined for error cases
+                data: undefined,
             };
-            // ... rest of the error handling logic remains the same
+            // Check if error is an AxiosError
+            if (axios_1.default.isAxiosError(error)) {
+                const axiosError = error;
+                const response = axiosError.response;
+                errorResponse = {
+                    success: false,
+                    error: {
+                        message: ((_a = response === null || response === void 0 ? void 0 : response.data) === null || _a === void 0 ? void 0 : _a.message) ||
+                            ((_b = response === null || response === void 0 ? void 0 : response.data) === null || _b === void 0 ? void 0 : _b.error) ||
+                            axiosError.message ||
+                            'An unexpected error occurred',
+                        code: response === null || response === void 0 ? void 0 : response.status,
+                        details: response === null || response === void 0 ? void 0 : response.data,
+                    },
+                    metadata: {
+                        statusCode: (_c = response === null || response === void 0 ? void 0 : response.status) !== null && _c !== void 0 ? _c : 0,
+                        headers: response === null || response === void 0 ? void 0 : response.headers,
+                    },
+                    data: undefined,
+                };
+            }
+            else if (error instanceof Error) {
+                // Non-Axios error
+                errorResponse.error = {
+                    message: error.message,
+                };
+            }
+            // Call custom error handler if provided
+            if (this.errorHandler) {
+                yield this.errorHandler({
+                    message: ((_d = errorResponse.error) === null || _d === void 0 ? void 0 : _d.message) || 'Unknown error',
+                    statusCode: (_e = errorResponse.metadata) === null || _e === void 0 ? void 0 : _e.statusCode,
+                    details: (_f = errorResponse.error) === null || _f === void 0 ? void 0 : _f.details,
+                    isAxiosError: axios_1.default.isAxiosError(error),
+                });
+            }
             return errorResponse;
         });
     }
