@@ -226,6 +226,10 @@ export class HttpClient {
       });
     }
 
+    console.error({
+      ...errorResponse
+    })
+
     return errorResponse;
   }
 }

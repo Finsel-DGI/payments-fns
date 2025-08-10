@@ -10,6 +10,7 @@ declare const channels: {
     mobile_money: "mobile_money";
     bank_transfer: "bank_transfer";
     eft: "eft";
+    pay_with_bank: "pay_with_bank";
 };
 export type PaymentChannels = keyof typeof channels;
 export type BillingPlans = keyof typeof plans;

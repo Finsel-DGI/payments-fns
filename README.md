@@ -1,11 +1,11 @@
-# Console Shared Types
+# Payments funs
 
-A TypeScript package containing shared types and classes for console applications.
+A TypeScript package containing shared types and classes for payments.
 
 ## Project Structure
 
 ```
-console-shared-types/
+payments-fns/
 ├── src/
 │   ├── types/          # Type definitions
 │   │   └── index.ts    # Types barrel export

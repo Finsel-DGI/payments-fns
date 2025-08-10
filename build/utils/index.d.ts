@@ -1,3 +1,4 @@
+import { PaymentChannels } from "..";
 /**
  * Generic function to get enum value by key
  * @param enumObj - The enum object to search in
@@ -28,3 +29,18 @@ export declare function getEnumValueByString<T extends Record<string, string>>(e
  */
 export declare function isValidEnumKey<T extends Record<string, string>>(enumObj: T, key: string): key is Extract<keyof T, string>;
 export declare function normalize(text: string): string;
+/**
+* Generates formatted currency string
+* @param {number} amount to be formatted
+* @param {string} currency value currency
+* @return {string} value
+*/
+export declare function formatCurrency(amount: number, currency?: string): string;
+/**
+ * Converts amount in kobo (minor currency unit) to naira (major unit)
+ *
+ * @param {number} amountInKobo - Amount received from payment processor (e.g., 1000000000)
+ * @return {number} Parsed amount in naira (e.g., 10000000)
+ */
+export declare function parseAmountFromKobo(amountInKobo: number): number;
+export declare function isValidPaymentChannels(channels: string[], validChannels: PaymentChannels[]): channels is PaymentChannels[];

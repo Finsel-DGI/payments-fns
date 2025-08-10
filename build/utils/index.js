@@ -6,6 +6,9 @@ exports.getEnumValueSafe = getEnumValueSafe;
 exports.getEnumValueByString = getEnumValueByString;
 exports.isValidEnumKey = isValidEnumKey;
 exports.normalize = normalize;
+exports.formatCurrency = formatCurrency;
+exports.parseAmountFromKobo = parseAmountFromKobo;
+exports.isValidPaymentChannels = isValidPaymentChannels;
 /**
  * Generic function to get enum value by key
  * @param enumObj - The enum object to search in
@@ -50,5 +53,28 @@ function isValidEnumKey(enumObj, key) {
 }
 function normalize(text) {
     return text.trim().toLowerCase();
+}
+/* eslint-disable */
+/**
+* Generates formatted currency string
+* @param {number} amount to be formatted
+* @param {string} currency value currency
+* @return {string} value
+*/
+function formatCurrency(amount, currency = "NGN") {
+    return new Intl.NumberFormat("en-US", { style: "currency", currency: currency.toUpperCase() }).format(amount);
+}
+/**
+ * Converts amount in kobo (minor currency unit) to naira (major unit)
+ *
+ * @param {number} amountInKobo - Amount received from payment processor (e.g., 1000000000)
+ * @return {number} Parsed amount in naira (e.g., 10000000)
+ */
+function parseAmountFromKobo(amountInKobo) {
+    return amountInKobo / 100;
+}
+function isValidPaymentChannels(channels, validChannels) {
+    // Check if all items in the array are valid payment channels
+    return channels.every(channel => validChannels.includes(channel));
 }
 //# sourceMappingURL=index.js.map
