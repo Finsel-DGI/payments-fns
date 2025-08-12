@@ -132,6 +132,13 @@ export namespace Korapay {
     account_name: string;
     bank_name: string;
   }
+  
+  interface CardDetails {
+    card_type: string;
+    first_six: string;
+    last_four: string;
+    expiry: string;
+  }
 
   interface Pagination {
     page: number;
@@ -157,7 +164,9 @@ export namespace Korapay {
       fee: number;
       currency: string;
       description: string;
+      payment_method?: string;
       payer_bank_account?: PayerBankAccount;
+      card?: CardDetails;
     }
   } & KoraPayload;
 
