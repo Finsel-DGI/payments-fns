@@ -70,7 +70,7 @@ class KorapayService {
             var _a, _b;
             console.log("Received this -- ", Object.assign({}, params));
             return this.makeRequest('POST', '/charges/initialize', {
-                body: Object.assign(Object.assign({}, params), { currency: (_a = params.currency) !== null && _a !== void 0 ? _a : 'NGN', merchant_bears_cost: (_b = params.merchant_bears_cost) !== null && _b !== void 0 ? _b : true })
+                body: Object.assign(Object.assign({}, params), { currency: ((_a = (params.currency)) !== null && _a !== void 0 ? _a : 'NGN').toUpperCase(), merchant_bears_cost: (_b = params.merchant_bears_cost) !== null && _b !== void 0 ? _b : true })
             });
         });
     }

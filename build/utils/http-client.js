@@ -146,7 +146,9 @@ class HttpClient {
                     isAxiosError: axios_1.default.isAxiosError(error),
                 });
             }
-            console.error(Object.assign({}, errorResponse));
+            console.error("Axios error: ", {
+                alert: JSON.stringify(errorResponse),
+            });
             return errorResponse;
         });
     }

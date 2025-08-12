@@ -226,8 +226,8 @@ export class HttpClient {
       });
     }
 
-    console.error({
-      ...errorResponse
+    console.error("Axios error: ", {
+      alert: JSON.stringify(errorResponse),
     })
 
     return errorResponse;

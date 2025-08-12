@@ -89,7 +89,7 @@ export class KorapayService {
       {
         body: {
           ...params,
-          currency: params.currency ?? 'NGN',
+          currency: ((params.currency) ?? 'NGN').toUpperCase(),
           merchant_bears_cost: params.merchant_bears_cost ?? true,
         }
       }
