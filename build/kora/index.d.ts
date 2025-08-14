@@ -103,6 +103,11 @@ export declare class KorapayService {
         account_reference: string;
         customer: KoraCustomer;
     }): Promise<Korapay.CreateVirtualAccount>;
+    creditSandboxVirtualAccount(params: {
+        account_number: string;
+        amount: number;
+        currency?: string;
+    }): Promise<void>;
     fetchVirtualAccount(reference: string): Promise<Korapay.VirtualAccount>;
     fetchVirtualAccountTransactions(account_number: string): Promise<Korapay.VirtualAccountTransactions>;
     getBalances(): Promise<Korapay.Balances>;

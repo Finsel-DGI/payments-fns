@@ -149,6 +149,13 @@ class KorapayService {
             });
         });
     }
+    creditSandboxVirtualAccount(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.makeRequest('POST', '/virtual-bank-account/sandbox/credit', {
+                body: Object.assign({}, params)
+            });
+        });
+    }
     fetchVirtualAccount(reference) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.makeRequest('GET', `/virtual-bank-account/${reference}`);

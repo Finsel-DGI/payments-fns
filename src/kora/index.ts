@@ -267,6 +267,22 @@ export class KorapayService {
       }
     );
   }
+  
+  public async creditSandboxVirtualAccount(params: {
+    account_number: string;
+    amount: number,
+    currency?: string;
+  }): Promise<void> {
+    return this.makeRequest(
+      'POST',
+      '/virtual-bank-account/sandbox/credit',
+      {
+        body: {
+          ...params,
+        }
+      }
+    );
+  }
 
   public async fetchVirtualAccount(reference: string): Promise<Korapay.VirtualAccount> {
     return this.makeRequest(
@@ -281,6 +297,8 @@ export class KorapayService {
       `/virtual-bank-account/transactions?account_number=${account_number}`
     );
   }
+
+
 
   // balance
   public async getBalances()
