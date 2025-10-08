@@ -118,6 +118,39 @@ export declare class StripeService {
         mode: "setup" | "payment" | "subscription";
     }): Promise<Stripe.Response<Stripe.Checkout.Session>>;
     /**
+     * Creates a new Stripe Connect Express account and an account link for onboarding.
+     * This function facilitates the creation of a new merchant account on Stripe Connect
+     * and generates a URL for the merchant to complete their onboarding process.
+     *
+     * @param {object} params - The parameters for creating the Connect account and account link.
+     * @param {string} params.refresh_url - The URL that Stripe will redirect the user to if their account link session expires.
+     * @param {string} params.return_url - The URL that Stripe will redirect the user to after they complete the onboarding process.
+     *                                     It can contain a `<<ACCOUNT_ID>>` placeholder which will be replaced with the actual account ID.
+     * @param {object} params.company - Details about the company or business for the Connect account.
+     * @param {string} params.company.name - The legal name of the company or business.
+     * @param {string} params.company.email - The email address associated with the Connect account.
+     * @param {Stripe.AccountCreateParams.BusinessType} params.company.business_type - The business type of the Connect account (e.g., 'individual', 'company').
+     * @param {string} [params.company.country] - The country in which the account holder resides or the business is legally established (ISO 3166-1 alpha-2 country code).
+     * @param {Stripe.AccountCreateParams.Capabilities} [params.capabilities] - Specific capabilities to request for the Connect account.
+     *                                                                        Defaults to `card_payments` and `transfers` if not provided.
+     * @returns {Promise<{connect: Stripe.Response<Stripe.AccountLink>, account: Stripe.Response<Stripe.Account>}>}
+     *          A promise that resolves to an object containing the created Stripe AccountLink and the Stripe Account.
+     */
+    connectMerchantAfresh(params: {
+        refresh_url: string;
+        return_url: string;
+        company: {
+            name: string;
+            email: string;
+            business_type: Stripe.AccountCreateParams.BusinessType;
+            country?: string;
+        };
+        capabilities?: Stripe.AccountCreateParams.Capabilities;
+    }): Promise<{
+        connect: Stripe.Response<Stripe.AccountLink>;
+        account: Stripe.Response<Stripe.Account>;
+    }>;
+    /**
      * Callable function to retrieve stripe connect user
      * @param {string} customerID query customer id
      * @return {Promise<Stripe.Response<Stripe.Account>>}

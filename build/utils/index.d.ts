@@ -44,3 +44,7 @@ export declare function formatCurrency(amount: number, currency?: string): strin
  */
 export declare function parseAmountFromKobo(amountInKobo: number): number;
 export declare function isValidPaymentChannels(channels: string[], validChannels: PaymentChannels[]): channels is PaymentChannels[];
+type ParamValue = string | string[] | number | boolean;
+type ParamsRecord = Record<string, ParamValue>;
+export declare function buildSearchParams(host: string, params: ParamsRecord): string;
+export {};

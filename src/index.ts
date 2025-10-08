@@ -8,5 +8,6 @@ export * from './utils/safe-string';
 export * from './paystack';
 export * from './stripe';
 export * from './kora';
+export * from './flutterwave';
 
 // Export classes

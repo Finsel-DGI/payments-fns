@@ -9,6 +9,7 @@ exports.normalize = normalize;
 exports.formatCurrency = formatCurrency;
 exports.parseAmountFromKobo = parseAmountFromKobo;
 exports.isValidPaymentChannels = isValidPaymentChannels;
+exports.buildSearchParams = buildSearchParams;
 /**
  * Generic function to get enum value by key
  * @param enumObj - The enum object to search in
@@ -76,5 +77,31 @@ function parseAmountFromKobo(amountInKobo) {
 function isValidPaymentChannels(channels, validChannels) {
     // Check if all items in the array are valid payment channels
     return channels.every(channel => validChannels.includes(channel));
+}
+function buildSearchParams(host, params) {
+    // Build URLSearchParams
+    const searchParams = new URLSearchParams();
+    // Iterate through params using for...in loop (ES2016 compatible)
+    for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+            const value = params[key];
+            // Filter out undefined/null/empty string values
+            if (value !== undefined && value !== null && value !== '') {
+                if (Array.isArray(value)) {
+                    // Handle arrays by adding multiple entries with the same key
+                    value.forEach(v => searchParams.append(key, String(v)));
+                }
+                else {
+                    // Convert boolean/number to string
+                    searchParams.append(key, String(value));
+                }
+            }
+        }
+    }
+    // If no valid params, return just the host
+    if (searchParams.toString().length === 0) {
+        return host;
+    }
+    return `${host}?${searchParams.toString()}`;
 }
 //# sourceMappingURL=index.js.map

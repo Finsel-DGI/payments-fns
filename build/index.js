@@ -23,5 +23,6 @@ __exportStar(require("./utils/safe-string"), exports);
 __exportStar(require("./paystack"), exports);
 __exportStar(require("./stripe"), exports);
 __exportStar(require("./kora"), exports);
+__exportStar(require("./flutterwave"), exports);
 // Export classes
 //# sourceMappingURL=index.js.map

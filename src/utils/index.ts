@@ -90,3 +90,36 @@ export function isValidPaymentChannels(channels: string[], validChannels: Paymen
   // Check if all items in the array are valid payment channels
   return channels.every(channel => validChannels.includes(channel as PaymentChannels));
 }
+
+type ParamValue = string | string[] | number | boolean;
+type ParamsRecord = Record<string, ParamValue>;
+
+export function buildSearchParams(host: string, params: ParamsRecord): string {
+  // Build URLSearchParams
+  const searchParams = new URLSearchParams();
+
+  // Iterate through params using for...in loop (ES2016 compatible)
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      const value = params[key];
+      
+      // Filter out undefined/null/empty string values
+      if (value !== undefined && value !== null && value !== '') {
+        if (Array.isArray(value)) {
+          // Handle arrays by adding multiple entries with the same key
+          value.forEach(v => searchParams.append(key, String(v)));
+        } else {
+          // Convert boolean/number to string
+          searchParams.append(key, String(value));
+        }
+      }
+    }
+  }
+
+  // If no valid params, return just the host
+  if (searchParams.toString().length === 0) {
+    return host;
+  }
+
+  return `${host}?${searchParams.toString()}`;
+}
