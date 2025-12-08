@@ -6,6 +6,7 @@ import { Transfers } from "./modules/transfers";
 import { VirtualAccount } from "./modules/virtual-account";
 import { Transactions } from './modules/transactions';
 import { Wallet } from "./modules/wallet";
+import { Payments } from './modules/payments';
 interface Config {
     pk: string;
     sk: string;
@@ -15,6 +16,7 @@ export declare class Flutterwave {
     private readonly httpClient;
     private readonly config;
     readonly Transfers: Transfers;
+    readonly Payments: Payments;
     readonly CollectionSubaccount: CollectionSubaccount;
     readonly PayoutSubaccount: PayoutSubaccount;
     readonly VirtualAccount: VirtualAccount;

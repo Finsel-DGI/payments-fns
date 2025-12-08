@@ -343,6 +343,16 @@ export namespace Flw {
     }[];
   }
 
+
+  export interface PaymentLinkResponse {
+    status: string;
+    message: string;
+    data: {
+      link: string;
+    }
+  }
+
+
   export interface TransactionResponse {
     status: string;
     message: string;

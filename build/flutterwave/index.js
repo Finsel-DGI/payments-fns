@@ -18,6 +18,7 @@ const transfers_1 = require("./modules/transfers");
 const virtual_account_1 = require("./modules/virtual-account");
 const transactions_1 = require("./modules/transactions");
 const wallet_1 = require("./modules/wallet");
+const payments_1 = require("./modules/payments");
 ;
 class Flutterwave {
     /**
@@ -32,6 +33,7 @@ class Flutterwave {
         });
         // Initialize submodules
         this.Transfers = new transfers_1.Transfers(this);
+        this.Payments = new payments_1.Payments(this);
         this.CollectionSubaccount = new collection_subaccount_1.CollectionSubaccount(this);
         this.PayoutSubaccount = new payout_subaccount_1.PayoutSubaccount(this);
         this.VirtualAccount = new virtual_account_1.VirtualAccount(this);

@@ -6,6 +6,7 @@ import { Transfers } from "./modules/transfers";
 import { VirtualAccount } from "./modules/virtual-account";
 import { Transactions } from './modules/transactions';
 import { Wallet } from "./modules/wallet";
+import { Payments } from './modules/payments';
 
 interface Config {
   pk: string;
@@ -19,6 +20,7 @@ export class Flutterwave {
   private readonly config: Config;
 
   public readonly Transfers: Transfers;
+  public readonly Payments: Payments;
   public readonly CollectionSubaccount: CollectionSubaccount;
   public readonly PayoutSubaccount: PayoutSubaccount;
   public readonly VirtualAccount: VirtualAccount;
@@ -41,6 +43,7 @@ export class Flutterwave {
 
     // Initialize submodules
     this.Transfers = new Transfers(this);
+    this.Payments = new Payments(this);
     this.CollectionSubaccount = new CollectionSubaccount(this);
     this.PayoutSubaccount = new PayoutSubaccount(this);
     this.VirtualAccount = new VirtualAccount(this);

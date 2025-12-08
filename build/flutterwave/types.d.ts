@@ -323,6 +323,13 @@ export declare namespace Flw {
             bank_name: string;
         }[];
     }
+    interface PaymentLinkResponse {
+        status: string;
+        message: string;
+        data: {
+            link: string;
+        };
+    }
     interface TransactionResponse {
         status: string;
         message: string;
