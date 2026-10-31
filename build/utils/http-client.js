@@ -146,9 +146,9 @@ class HttpClient {
                     isAxiosError: axios_1.default.isAxiosError(error),
                 });
             }
-            console.error("Axios error: ", {
-                alert: JSON.stringify(errorResponse),
-            });
+            // Callers already inspect StandardResponse / rethrow. Do not console.error
+            // here — Next.js treats stderr as an overlay Issue even when the request
+            // is handled (e.g. Flutterwave test wallets returning 400).
             return errorResponse;
         });
     }

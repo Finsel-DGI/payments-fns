@@ -17,8 +17,8 @@ class Payments {
     create(params) {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
-            return this.flw.makeRequest('POST', `/payments`, {
-                body: Object.assign(Object.assign({}, params), { configuration: { session_duration: 30 }, max_retry_attempt: (_a = params.max_retry_attempt) !== null && _a !== void 0 ? _a : 5 })
+            return this.flw.makeRequest("POST", `/payments`, {
+                body: Object.assign(Object.assign({}, params), { configuration: { session_duration: 30 }, max_retry_attempt: (_a = params.max_retry_attempt) !== null && _a !== void 0 ? _a : 5 }),
             });
         });
     }

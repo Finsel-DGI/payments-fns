@@ -2,7 +2,7 @@ import { Flutterwave } from "..";
 import { Flw } from "../types";
 
 export class Payments {
-  constructor(private readonly flw: Flutterwave) { }
+  constructor(private readonly flw: Flutterwave) {}
 
   public async create(params: {
     amount: number;
@@ -18,8 +18,8 @@ export class Payments {
     };
     redirect_url: string;
     max_retry_attempt?: number;
-    payment_options: string,
-    link_expiration: Date,
+    payment_options: string;
+    link_expiration: Date;
     customizations?: {
       title: string;
       logo: string;
@@ -34,16 +34,14 @@ export class Payments {
     meta?: {
       meta_1?: string;
       meta_2?: string;
-    }
-  }): Promise<Flw.PaymentLinkResponse>{
-    return this.flw.makeRequest(
-      'POST',
-      `/payments`, {
+    };
+  }): Promise<Flw.PaymentLinkResponse> {
+    return this.flw.makeRequest("POST", `/payments`, {
       body: {
         ...params,
-          configuration: { session_duration: 30 },
-          max_retry_attempt: params.max_retry_attempt ?? 5,
-      }
+        configuration: { session_duration: 30 },
+        max_retry_attempt: params.max_retry_attempt ?? 5,
+      },
     });
   }
 }
