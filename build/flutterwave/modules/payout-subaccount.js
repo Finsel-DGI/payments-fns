@@ -28,27 +28,47 @@ class PayoutSubaccount {
      */
     create(params) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.flw.makeRequest('POST', '/payout-subaccounts', { body: Object.assign({}, params) });
+            return this.flw.makeRequest("POST", "/payout-subaccounts", {
+                body: Object.assign({}, params),
+            });
+        });
+    }
+    /**
+     * Creates a payout subaccount on Flutterwave.
+     * Payout subaccounts are used for disbursing funds.
+     *
+     * @param params - The parameters for creating the payout subaccount.
+     * @param params.account_name - The name of the account.
+     * @param params.email - The email address associated with the subaccount.
+     * @param params.country - The country of the subaccount (e.g., 'NG' for Nigeria).
+     * @param params.mobilenumber - The mobile number associated with the subaccount.
+     * @returns A Promise that resolves to void on successful creation.
+     */
+    createBasicPayoutSubaccount(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.flw.makeRequest("POST", "/payout-subaccounts", {
+                body: Object.assign({}, params),
+            });
         });
     }
     update(account_reference, params) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.flw.makeRequest('POST', `/payout-subaccounts/${account_reference}`, { body: Object.assign({}, params) });
+            return this.flw.makeRequest("POST", `/payout-subaccounts/${account_reference}`, { body: Object.assign({}, params) });
         });
     }
     fetch(account_reference) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.flw.makeRequest('GET', `/payout-subaccounts/${account_reference}`);
+            return this.flw.makeRequest("GET", `/payout-subaccounts/${account_reference}`);
         });
     }
     transactions(account_reference, params) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.flw.makeRequest('GET', (`/payout-subaccounts/${account_reference}/transactions`), { params: params });
+            return this.flw.makeRequest("GET", `/payout-subaccounts/${account_reference}/transactions`, { params: params });
         });
     }
     balance(account_reference, params) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.flw.makeRequest('GET', `/payout-subaccounts/${account_reference}/balances`, { params: params });
+            return this.flw.makeRequest("GET", `/payout-subaccounts/${account_reference}/balances`, { params: params });
         });
     }
     /**
@@ -60,12 +80,12 @@ class PayoutSubaccount {
      */
     getStaticVirtualAccount(account_reference, params) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.flw.makeRequest('GET', `/payout-subaccounts/${account_reference}/static-account`, { params: params });
+            return this.flw.makeRequest("GET", `/payout-subaccounts/${account_reference}/static-account`, { params: params });
         });
     }
     delete(account_reference) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.flw.makeRequest('DELETE', `/payout-subaccounts/${account_reference}`);
+            return this.flw.makeRequest("DELETE", `/payout-subaccounts/${account_reference}`);
         });
     }
 }
